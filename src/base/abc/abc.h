@@ -46,7 +46,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-
+#define ABC_ATTR_SIZE 5
 ABC_NAMESPACE_HEADER_START
 
 
@@ -148,6 +148,8 @@ struct Abc_Obj_t_     // 48/72 bytes (32-bits/64-bits)
       Abc_Obj_t *     pCopy;         // the copy of this object
       int             iTemp;
       float           dTemp; };
+  //AF Hack
+  int attributes_ [ABC_ATTR_SIZE];  
 };
 
 struct Abc_Ntk_t_ 
