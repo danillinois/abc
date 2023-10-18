@@ -29,6 +29,7 @@
 #define ABC_USE_BRIDGE
 #endif
 
+#define LIN64
 #ifdef _WIN32
 #ifndef __MINGW32__
 #define inline __inline // compatible with MS VS 6.0
