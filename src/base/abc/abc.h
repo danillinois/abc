@@ -149,7 +149,7 @@ struct Abc_Obj_t_     // 48/72 bytes (32-bits/64-bits)
       int             iTemp;
       float           dTemp; };
   //AF Hack
-  int attributes_ [ABC_ATTR_SIZE];  
+  int attributes_ [ABC_ATTR_SIZE];
 };
 
 struct Abc_Ntk_t_ 
@@ -213,6 +213,7 @@ struct Abc_Ntk_t_
     Vec_Ptr_t *       vOnehots;      // names of one-hot-encoded registers
     Vec_Int_t *       vObjPerm;      // permutation saved
     Vec_Int_t *       vTopo;
+  
     Vec_Ptr_t *       vAttrs;        // managers of various node attributes (node functionality, global BDDs, etc)
     Vec_Int_t *       vNameIds;      // name IDs
     Vec_Int_t *       vFins;         // obj/type info

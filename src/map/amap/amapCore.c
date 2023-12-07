@@ -54,6 +54,7 @@ void Amap_ManSetDefaultParams( Amap_Par_t * p )
     p->fFreeInvs = 0;            // assume inverters are free (area = 0)
     p->fEpsilon  = (float)0.001; // used to compare floating point numbers
     p->fVerbose  = 0;            // verbosity flag
+    printf("setting up amap params\n");
 }
 
 /**Function*************************************************************

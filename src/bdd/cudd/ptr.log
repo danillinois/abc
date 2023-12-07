@@ -1,0 +1,97 @@
+cudd.h:#define Cudd_Not(node) ((DdNode *)((ptrint)(node) ^ 01))
+cudd.h:#define Cudd_NotCond(node,c) ((DdNode *)((ptrint)(node) ^ (c)))
+cudd.h:#define Cudd_IsComplement(node) ((int) ((ptrint) (node) & 01))
+Binary file cuddAPI.o matches
+Binary file cuddAddAbs.o matches
+Binary file cuddAddIte.o matches
+Binary file cuddAndAbs.o matches
+Binary file cuddApa.o matches
+cuddApprox.c:        ptrint fanout = (ptrint) f->ref * Cudd_Regular(b)->ref;
+Binary file cuddApprox.o matches
+Binary file cuddBddAbs.o matches
+Binary file cuddBddCorr.o matches
+Binary file cuddBddIte.o matches
+Binary file cuddBridge.o matches
+Binary file cuddCache.o matches
+Binary file cuddCheck.o matches
+Binary file cuddClip.o matches
+Binary file cuddCof.o matches
+cuddCompose.c:        ptrint fanout = (ptrint) node->ref;
+cuddCompose.c:        ptrint fanout = (ptrint) N->ref;
+cuddCompose.c:        ptrint fanout = (ptrint) f->ref;
+cuddCompose.c:        ptrint fanout = (ptrint) f->ref;
+cuddCompose.c:        ptrint fanout = (ptrint) F->ref;
+Binary file cuddCompose.o matches
+Binary file cuddDecomp.o matches
+Binary file cuddEssent.o matches
+Binary file cuddExact.o matches
+cuddExport.c:                        retval = fprintf(fp,"\"%lx\";\n", ((mask & (ptrint) scan) / sizeof(DdNode)));
+cuddExport.c:                retval = fprintf(fp,"\"%lx\";\n", ((mask & (ptrint) scan) / sizeof(DdNode)));
+cuddExport.c:            retval = fprintf(fp," -> \"%lx\" [style = dotted];\n", ((mask & (ptrint) f[i]) / sizeof(DdNode)));
+cuddExport.c:            retval = fprintf(fp," -> \"%lx\" [style = solid];\n", ((mask & (ptrint) f[i]) / sizeof(DdNode)));
+cuddExport.c:                            ((mask & (ptrint) scan) / sizeof(DdNode)),
+cuddExport.c:                            ((mask & (ptrint) cuddT(scan)) / sizeof(DdNode)));
+cuddExport.c:                                ((mask & (ptrint) scan) / sizeof(DdNode)),
+cuddExport.c:                                ((mask & (ptrint) cuddE(scan)) / sizeof(DdNode)));
+cuddExport.c:                                ((mask & (ptrint) scan) / sizeof(DdNode)),
+cuddExport.c:                                ((mask & (ptrint) cuddE(scan)) / sizeof(DdNode)));
+cuddExport.c:                    ((mask & (ptrint) scan) / sizeof(DdNode)), cuddV(scan));
+Binary file cuddExport.o matches
+cuddGenCof.c:            *slot = (char *) (ptrint)((resT << 2) | resE);
+cuddGenCof.c:            *slot = (char *) (ptrint)((int)((ptrint) *slot) | (resT << 2) | resE);
+cuddGenCof.c:    if ( st__insert(cache, (char *)key, (char *)(ptrint)res) == st__OUT_OF_MEM) {
+cuddGenCof.c:    val = (int) (ptrint) entry->f;
+cuddGenCof.c:    val = val * 997 + (int) (ptrint) entry->c;
+Binary file cuddGenCof.o matches
+Binary file cuddGroup.o matches
+Binary file cuddInit.o matches
+cuddInt.h:typedef long ptrint;
+cuddInt.h:typedef int ptrint;
+cuddInt.h:typedef ABC_PTRINT_T ptrint;
+cuddInt.h:    ptrint count;
+cuddInt.h:    ptrint count;
+cuddInt.h:    ptrint count;
+cuddInt.h:extern int             cuddHashTableInsert( DdHashTable * hash, DdNodePtr * key, DdNode * value, ptrint count );
+cuddInt.h:extern int             cuddHashTableInsert1( DdHashTable * hash, DdNode * f, DdNode * value, ptrint count );
+cuddInt.h:extern int             cuddHashTableInsert2( DdHashTable * hash, DdNode * f, DdNode * g, DdNode * value, ptrint count );
+cuddInt.h:extern int             cuddHashTableInsert3( DdHashTable * hash, DdNode * f, DdNode * g, DdNode * h, DdNode * value, ptrint count );
+Binary file cuddInteract.o matches
+cuddLCache.c:    cache->itemsize += sizeof(ptrint);
+cuddLCache.c:        sizeof(ptrint) + sizeof(DdHashItem *);
+cuddLCache.c:  ptrint count)
+cuddLCache.c:  ptrint count)
+cuddLCache.c:  ptrint count)
+cuddLCache.c:  ptrint count)
+cuddLCache.c:    unsigned int val = (unsigned int) (ptrint) key[0] * DD_P2;
+cuddLCache.c:        val = val * DD_P1 + (int) (ptrint) key[i];
+Binary file cuddLCache.o matches
+Binary file cuddLinear.o matches
+Binary file cuddLiteral.o matches
+cuddPriority.c:        ptrint fanout = (ptrint) F->ref;
+Binary file cuddPriority.o matches
+Binary file cuddRead.o matches
+Binary file cuddReorder.o matches
+Binary file cuddSat.o matches
+Binary file cuddSign.o matches
+Binary file cuddSolve.o matches
+Binary file cuddSplit.o matches
+Binary file cuddSubsetHB.o matches
+Binary file cuddSubsetSP.o matches
+Binary file cuddSymmetry.o matches
+Binary file cuddTable.o matches
+cuddUtil.c:        ptrint fanout = (ptrint) N->ref;
+Binary file cuddUtil.o matches
+Binary file cuddZddFuncs.o matches
+Binary file cuddZddIsop.o matches
+Binary file cuddZddLin.o matches
+Binary file cuddZddPort.o matches
+Binary file cuddZddReord.o matches
+cuddZddUtil.c:                                         ((mask & (ptrint) scan) /
+cuddZddUtil.c:                                 ((mask & (ptrint) scan) / sizeof(DdNode)));
+cuddZddUtil.c:                         (void *) ((mask & (ptrint) f[i]) /
+cuddZddUtil.c:                            (void *) ((mask & (ptrint) scan) / sizeof(DdNode)),
+cuddZddUtil.c:                            (void *) ((mask & (ptrint) cuddT(scan)) /
+cuddZddUtil.c:                                         (void *) ((mask & (ptrint) scan)
+cuddZddUtil.c:                                         (void *) ((mask & (ptrint)
+cuddZddUtil.c:                                 (void *) ((mask & (ptrint) scan) /
+Binary file cuddZddUtil.o matches

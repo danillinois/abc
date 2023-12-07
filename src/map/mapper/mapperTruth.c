@@ -118,6 +118,12 @@ void Map_TruthsCut( Map_Man_t * p, Map_Cut_t * pCut )
     Map_TruthsCutOne( p, pCut, uTruth );
 
 
+    printf("Cut max vars %d truth %u %u\n",
+	   pCut -> nLeaves,
+	   uTruth[0],
+	   uTruth[1]
+	   );
+    
     // compute the canonical form for the positive phase
     if ( fUseFast )
         Map_CanonComputeFast( p, p->nVarsMax, pCut->nLeaves, uTruth, uPhases, uCanon );

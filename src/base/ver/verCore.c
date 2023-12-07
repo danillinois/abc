@@ -408,7 +408,7 @@ int Ver_ParseModule( Ver_Man_t * pMan )
 
     // get the network name
     pWord = Ver_ParseGetName( pMan );
-
+    printf("Parsing module %s\n", pWord);
     // get the network with this name
     pNtk = Ver_ParseFindOrCreateNetwork( pMan, pWord );
 
@@ -501,8 +501,11 @@ int Ver_ParseModule( Ver_Man_t * pMan )
             RetValue = Ver_ParseSignal( pMan, pNtk, VER_SIG_WIRE );
         else // assume this is the box used in the current design
         {
-            pNtkTemp = Ver_ParseFindOrCreateNetwork( pMan, pWord );
-            RetValue = Ver_ParseBox( pMan, pNtk, pNtkTemp );
+	  static int debug;
+	  debug++;
+	  printf("Debug %d pWord is %s\n",debug,pWord);
+	  pNtkTemp = Ver_ParseFindOrCreateNetwork( pMan, pWord );
+	  RetValue = Ver_ParseBox( pMan, pNtk, pNtkTemp );
         }
         if ( RetValue == 0 )
             return 0;
@@ -568,8 +571,14 @@ int Ver_ParseLookupSuffix( Ver_Man_t * pMan, char * pWord, int * pnMsb, int * pn
         return 1;
     if ( ! st__lookup( pMan->tName2Suffix, (char *)pWord, (char **)&Value ) )
         return 1;
-    *pnMsb = (Value >> 8) & 0xff;
+    unsigned shifted_value = Value >> 8;
+    unsigned masked_value = shifted_value & 0xFF;
+    int int_value = (int)masked_value;
+    *pnMsb = int_value;//(Value >> 8) & 0xff;
     *pnLsb = Value & 0xff;
+    printf("msb %d lsb %d\n",
+	   *pnMsb,
+	   *pnLsb);
     return 1;
 }
 
@@ -1748,6 +1757,8 @@ int Ver_ParseBox( Ver_Man_t * pMan, Abc_Ntk_t * pNtk, Abc_Ntk_t * pNtkBox )
     if ( pWord == NULL )
         return 0;
 
+    printf("Handling box %s\n", pWord);
+    
     // create a box with this name
     pNode = Abc_NtkCreateBlackbox( pNtk );
     pNode->pData = pNtkBox;

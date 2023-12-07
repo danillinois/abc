@@ -18,9 +18,7 @@
 //#define _BSD_SOURCE
 
 #ifndef WIN32
-#ifndef _DEFAULT_SOURCE
 #define _DEFAULT_SOURCE
-#endif
 #include <unistd.h>
 #endif
 

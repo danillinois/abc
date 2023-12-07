@@ -897,20 +897,7 @@ void Abc_AigReplace_int( Abc_Aig_t * pMan, Abc_Obj_t * pOld, Abc_Obj_t * pNew, i
     {
         if ( Abc_ObjIsCo(pFanout) )
         {
-            pFanin1 = Abc_ObjRegular( pNew );
-            if ( pFanin1->fMarkB )
-                Abc_AigRemoveFromLevelStructureR( pMan->vLevelsR, pFanin1 );
-            if ( fUpdateLevel && pMan->pNtkAig->vLevelsR )
-            {
-                Abc_ObjSetReverseLevel( pFanin1, Abc_ObjReverseLevel(pOld) );
-                assert( pFanin1->fMarkB == 0 );
-                if ( !Abc_ObjIsCi(pFanin1) )
-                {
-                    pFanin1->fMarkB = 1;
-                    Vec_VecPush( pMan->vLevelsR, Abc_ObjReverseLevel(pFanin1), pFanin1 );
-                }
-            }
-            Abc_ObjPatchFanin( pFanout, pOld, pNew );            
+            Abc_ObjPatchFanin( pFanout, pOld, pNew );
             continue;
         }
         // find the old node as a fanin of this fanout

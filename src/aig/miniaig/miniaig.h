@@ -1,3 +1,4 @@
+
 /**CFile****************************************************************
 
   FileName    [miniaig.h]
@@ -30,9 +31,9 @@
 #include <string.h>
 #include <assert.h>
 
-#ifndef _VERIFIC_DATABASE_H_
-ABC_NAMESPACE_HEADER_START
-#endif
+//#ifndef _VERIFIC_DATABASE_H_
+//ABC_NAMESPACE_HEADER_START
+//#endif
 
 ////////////////////////////////////////////////////////////////////////
 ///                         PARAMETERS                               ///
@@ -838,9 +839,9 @@ void Mini_AigTest()
 ///                    FUNCTION DECLARATIONS                         ///
 ////////////////////////////////////////////////////////////////////////
 
-#ifndef _VERIFIC_DATABASE_H_
-ABC_NAMESPACE_HEADER_END
-#endif
+//#ifndef _VERIFIC_DATABASE_H_
+//ABC_NAMESPACE_HEADER_END
+//#endif
 
 #endif
 

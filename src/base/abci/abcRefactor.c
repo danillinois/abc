@@ -160,8 +160,6 @@ Dec_Graph_t * Abc_NodeRefactor( Abc_ManRef_t * p, Abc_Obj_t * pNode, Vec_Ptr_t *
     word * pTruth;
     abctime clk;
     int i, nNodesSaved, nNodesAdded, Required;
-    if ( fUseZeros )
-        nMinSaved = 0;
 
     p->nNodesConsidered++;
 

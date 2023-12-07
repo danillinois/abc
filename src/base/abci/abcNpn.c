@@ -25,9 +25,6 @@
 #include "bool/lucky/lucky.h"
 #include "opt/dau/dau.h"
 
-ABC_NAMESPACE_IMPL_START
-
-
 ////////////////////////////////////////////////////////////////////////
 ///                        DECLARATIONS                              ///
 ////////////////////////////////////////////////////////////////////////
@@ -45,9 +42,15 @@ struct Abc_TtStore_t_
     int                nVars;
     int                nWords;
     int                nFuncs;
-    word **            pFuncs;
+  word **            pFuncs; //64 bit
 };
 
+
+
+
+
+
+ABC_NAMESPACE_IMPL_START
 extern Abc_TtStore_t * Abc_TtStoreLoad( char * pFileName, int nVarNum );
 extern void            Abc_TtStoreFree( Abc_TtStore_t * p, int nVarNum );
 extern void            Abc_TtStoreWrite( char * pFileName, Abc_TtStore_t * p, int fBinary );
@@ -86,6 +89,9 @@ static inline int Abc_TruthHashLookup( word ** pFuncs, int iThis, int nWords, in
             return 1;
     return 0;
 }
+
+
+
 // hashes truth tables and collects unique ones
 int Abc_TruthNpnCountUnique( Abc_TtStore_t * p )
 {
@@ -151,15 +157,24 @@ int Abc_TruthNpnCountUniqueSort( Abc_TtStore_t * p )
   SeeAlso     []
 
 ***********************************************************************/
+
 void Abc_TruthNpnPrint( char * pCanonPermInit, unsigned uCanonPhase, int nVars )
 {
+  fflush(stdout);
+  printf("\nPrinting abc npn signature\n");
     char pCanonPerm[16]; int i;
     assert( nVars <= 16 );
-    for ( i = 0; i < nVars; i++ )
+    printf("Canon perm\n");
+    for ( i = 0; i < nVars; i++ ){
         pCanonPerm[i] = pCanonPermInit ? pCanonPermInit[i] : 'a' + i;
+	printf("%c ", pCanonPerm[i]);
+    }
     printf( "   %c = ( ", Abc_InfoHasBit(&uCanonPhase, nVars) ? 'Z':'z' );
-    for ( i = 0; i < nVars; i++ )
-        printf( "%c%s", pCanonPerm[i] + ('A'-'a') * Abc_InfoHasBit(&uCanonPhase, pCanonPerm[i]-'a'), i == nVars-1 ? "":"," );
+    for ( i = 0; i < nVars; i++ ){
+      printf( "%c%s", pCanonPerm[i] + ('A'-'a') * Abc_InfoHasBit(&uCanonPhase, pCanonPerm[i]-'a'), i == nVars-1 ? "":"," );
+      //      printf("Var %c\n", pCanonPerm[i]);
+      //      printf( "%c%s", pCanonPerm[i] + ('A'-'a') , i == nVars-1 ? "":"," );
+    }
     printf( " )  " );
 }
 
@@ -264,7 +279,7 @@ void Abc_TruthNpnPerform( Abc_TtStore_t * p, int NpnType, int fVerbose )
             resetPCanonPermArray(pCanonPerm, p->nVars);
             uCanonPhase = luckyCanonicizer_final_fast( p->pFuncs[i], p->nVars, pCanonPerm );
             if ( fVerbose )
-                Extra_PrintHex( stdout, (unsigned *)p->pFuncs[i], p->nVars ), Abc_TruthNpnPrint(pCanonPerm, uCanonPhase, p->nVars), printf( "\n" );
+	      Extra_PrintHex( stdout, (unsigned *)p->pFuncs[i], p->nVars ), Abc_TruthNpnPrint(pCanonPerm, uCanonPhase, p->nVars), printf( "\n" );
         }
     }
     else if ( NpnType == 4 )
@@ -447,3 +462,30 @@ int Abc_NpnTest( char * pFileName, int NpnType, int nVarNum, int fDumpRes, int f
 
 ABC_NAMESPACE_IMPL_END
 
+// hashes truth tables and collects unique ones
+
+int Abc_TruthNpnCountUniqueH( Abc_TtStore_t * p )
+{
+    // allocate hash table
+    int nTableSize = Abc_PrimeCudd(p->nFuncs);
+    int * pTable = ABC_FALLOC( int, nTableSize );
+    int * pNexts = ABC_FALLOC( int, nTableSize );
+    // hash functions
+    int i, k, Key;
+    for ( i = 0; i < p->nFuncs; i++ )
+    {
+        Key = Abc_TruthHashKey( p->pFuncs[i], p->nWords, nTableSize );
+        if ( Abc_TruthHashLookup( p->pFuncs, i, p->nWords, pTable, pNexts, Key ) ) // found equal
+            p->pFuncs[i] = NULL;
+        else // there is no equal (the first time this one occurs so far)
+            pNexts[i] = pTable[Key], pTable[Key] = i;
+    }
+    ABC_FREE( pTable );
+    ABC_FREE( pNexts );
+    // count the number of unqiue functions
+    assert( p->pFuncs[0] != NULL );
+    for ( i = k = 1; i < p->nFuncs; i++ )
+        if ( p->pFuncs[i] != NULL )
+            p->pFuncs[k++] = p->pFuncs[i];
+    return (p->nFuncs = k);
+}

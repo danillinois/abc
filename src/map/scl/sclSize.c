@@ -197,7 +197,7 @@ void Abc_SclTimeNtkPrint( SC_Man * p, int fShowAll, int fPrintPath )
         while ( pObj && Abc_ObjIsNode(pObj) )
         {
             i++;
-            nLength = Abc_MaxInt( nLength, Abc_SclObjCell(pObj) ? strlen(Abc_SclObjCell(pObj)->pName) : 2 /* strlen("pi") */ );
+            nLength = Abc_MaxInt( nLength, strlen(Abc_SclObjCell(pObj)->pName) );
             pObj = Abc_SclFindMostCriticalFanin( p, &fRise, pObj );
         }
 
@@ -290,7 +290,7 @@ static inline void Abc_SclDeptObj( SC_Man * p, Abc_Obj_t * pObj )
         Abc_SclDeptFanin( p, pTime, pFanout, pObj );
     }
 }
-static inline float Abc_SclObjLoadValue( SC_Man * p, Abc_Obj_t * pObj )
+static inline float Abc_SclObjLoadsValue( SC_Man * p, Abc_Obj_t * pObj )
 {
 //    float Value = Abc_MaxFloat(pLoad->fall, pLoad->rise) / (p->EstLoadAve * p->EstLoadMax);
     return (0.5 * Abc_SclObjLoad(p, pObj)->fall + 0.5 * Abc_SclObjLoad(p, pObj)->rise) / (p->EstLoadAve * p->EstLoadMax);
@@ -313,9 +313,12 @@ void Abc_SclTimeNode( SC_Man * p, Abc_Obj_t * pObj, int fDept )
     SC_Pair * pLoad = Abc_SclObjLoad( p, pObj );
     float LoadRise = pLoad->rise;
     float LoadFall = pLoad->fall;
+    printf("fDept %d\n",fDept);
+    printf("Load Rise %f\n", LoadRise);
+    printf("Load Fall %f\n", LoadFall);    
     float DeptRise = 0;
     float DeptFall = 0;
-    float Value = p->EstLoadMax ? Abc_SclObjLoadValue( p, pObj ) : 0;
+    float Value = p->EstLoadMax ? Abc_SclObjLoadsValue( p, pObj ) : 0;
     Abc_Obj_t * pFanin;
     if ( Abc_ObjIsCi(pObj) )
     {
@@ -407,8 +410,10 @@ void Abc_SclTimeNtkRecompute( SC_Man * p, float * pArea, float * pDelay, int fRe
     p->nEstNodes = 0;
     Abc_NtkForEachCi( p->pNtk, pObj, i )
         Abc_SclTimeNode( p, pObj, 0 );
-    Abc_NtkForEachNode1( p->pNtk, pObj, i )
-        Abc_SclTimeNode( p, pObj, 0 );
+    Abc_NtkForEachNode1( p->pNtk, pObj, i ){
+      printf("Timing node %d \n",pObj -> Id);
+      Abc_SclTimeNode( p, pObj, 0 );
+    }
     Abc_NtkForEachCo( p->pNtk, pObj, i )
         Abc_SclTimeNode( p, pObj, 0 );
     D = Abc_SclReadMaxDelay( p );
