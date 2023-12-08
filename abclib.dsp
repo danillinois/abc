@@ -387,10 +387,6 @@ SOURCE=.\src\base\abci\abcOrder.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\base\abci\abcOrchestration.c
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\base\abci\abcPart.c
 # End Source File
 # Begin Source File
@@ -676,10 +672,6 @@ SOURCE=.\src\base\io\ioWriteCnf.c
 # Begin Source File
 
 SOURCE=.\src\base\io\ioWriteDot.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\base\io\ioWriteEdgelist.c
 # End Source File
 # Begin Source File
 
@@ -5115,14 +5107,6 @@ SOURCE=.\src\aig\gia\giaMuxes.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\src\aig\gia\giaNewBdd.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\aig\gia\giaNewTt.h
-# End Source File
-# Begin Source File
-
 SOURCE=.\src\aig\gia\giaNf.c
 # End Source File
 # Begin Source File
@@ -5316,18 +5300,6 @@ SOURCE=.\src\aig\gia\giaTsim.c
 # Begin Source File
 
 SOURCE=.\src\aig\gia\giaTtopt.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\aig\gia\giaTransduction.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\aig\gia\giaTransduction.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\src\aig\gia\giaTranStoch.c
 # End Source File
 # Begin Source File
 
