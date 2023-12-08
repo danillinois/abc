@@ -465,22 +465,22 @@ int Abc_NpnTest( char * pFileName, int NpnType, int nVarNum, int fDumpRes, int f
 ////////////////////////////////////////////////////////////////////////
 
 
-ABC_NAMESPACE_IMPL_END
+
 
 // hashes truth tables and collects unique ones
 
 int Abc_TruthNpnCountUniqueH( Abc_TtStore_t * p )
 {
     // allocate hash table
-    int nTableSize = Abc_PrimeCudd(p->nFuncs);
+  int nTableSize = Abc_PrimeCudd(p->nFuncs);
     int * pTable = ABC_FALLOC( int, nTableSize );
     int * pNexts = ABC_FALLOC( int, nTableSize );
     // hash functions
     int i, k, Key;
     for ( i = 0; i < p->nFuncs; i++ )
     {
-        Key = Abc_TruthHashKey( p->pFuncs[i], p->nWords, nTableSize );
-        if ( Abc_TruthHashLookup( p->pFuncs, i, p->nWords, pTable, pNexts, Key ) ) // found equal
+      Key = Abc_TruthHashKey( p->pFuncs[i], p->nWords, nTableSize );
+      if ( Abc_TruthHashLookup( p->pFuncs, i, p->nWords, pTable, pNexts, Key ) ) // found equal
             p->pFuncs[i] = NULL;
         else // there is no equal (the first time this one occurs so far)
             pNexts[i] = pTable[Key], pTable[Key] = i;
@@ -494,3 +494,4 @@ int Abc_TruthNpnCountUniqueH( Abc_TtStore_t * p )
             p->pFuncs[k++] = p->pFuncs[i];
     return (p->nFuncs = k);
 }
+ABC_NAMESPACE_IMPL_END
