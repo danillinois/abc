@@ -36,15 +36,15 @@
 // 3 - exact NPN
 
 // data-structure to store a bunch of truth tables
-typedef struct Abc_TtStore_t_  Abc_TtStore_t;
+
 struct Abc_TtStore_t_ 
 {
     int                nVars;
     int                nWords;
     int                nFuncs;
-  word **            pFuncs; //64 bit
+    word **            pFuncs; //64 bit
 };
-
+typedef struct Abc_TtStore_t_  Abc_TtStore_t;
 
 
 
@@ -132,7 +132,7 @@ int Abc_TruthNpnCountUnique( Abc_TtStore_t * p )
 ***********************************************************************/
 int nWords = 0; // unfortunate global variable
 int Abc_TruthCompare( word ** p1, word ** p2 ) { return memcmp(*p1, *p2, sizeof(word) * nWords); }
-int Abc_TruthNpnCountUniqueSort( Abc_TtStore_t * p )
+int Abc_TruthNpnCountUniqueSort( struct Abc_TtStore_t_ * p )
 {
     int i, k;
     // sort them by value
