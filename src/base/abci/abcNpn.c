@@ -17,7 +17,7 @@
   Revision    [$Id: abcNpn.c,v 1.00 2005/06/20 00:00:00 alanmi Exp $]
 
 ***********************************************************************/
-
+#include "misc/util/abc_global.h"
 #include "misc/extra/extra.h"
 #include "misc/vec/vec.h"
 
