@@ -42,7 +42,7 @@ struct Abc_TtStore_t_
     int                nVars;
     int                nWords;
     int                nFuncs;
-    ABC_UINT64_T **            pFuncs; //64 bit
+    unsigned long **            pFuncs; //64 bit
 };
 
 typedef struct Abc_TtStore_t_  Abc_TtStore_t;
