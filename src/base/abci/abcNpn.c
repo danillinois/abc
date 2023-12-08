@@ -55,6 +55,9 @@ ABC_NAMESPACE_IMPL_START
 extern Abc_TtStore_t * Abc_TtStoreLoad( char * pFileName, int nVarNum );
 extern void            Abc_TtStoreFree( Abc_TtStore_t * p, int nVarNum );
 extern void            Abc_TtStoreWrite( char * pFileName, Abc_TtStore_t * p, int fBinary );
+static inline int Abc_PrimeCudd( unsigned int p );
+static inline int Abc_TruthHashKey( word * pFunc, int nWords, int nTableSize );
+static inline int Abc_TruthHashLookup( word ** pFuncs, int iThis, int nWords, int * pTable, int * pNexts, int Key );
 
 ////////////////////////////////////////////////////////////////////////
 ///                     FUNCTION DEFINITIONS                         ///
@@ -97,6 +100,7 @@ static inline int Abc_TruthHashLookup( word ** pFuncs, int iThis, int nWords, in
 int Abc_TruthNpnCountUnique( Abc_TtStore_t * p )
 {
     // allocate hash table
+  
     int nTableSize = Abc_PrimeCudd(p->nFuncs);
     int * pTable = ABC_FALLOC( int, nTableSize );
     int * pNexts = ABC_FALLOC( int, nTableSize );
