@@ -408,6 +408,8 @@ void Abc_TruthNpnPerform( Abc_TtStore_t * p, int NpnType, int fVerbose )
 ***********************************************************************/
 void Abc_TruthNpnTest( char * pFileName, int NpnType, int nVarNum, int fDumpRes, int fBinary, int fVerbose )
 {
+  printf("Unsupported\n");
+  /*
     Abc_TtStore_t * p;
     char * pFileNameOut;
 
@@ -434,6 +436,7 @@ void Abc_TruthNpnTest( char * pFileName, int NpnType, int nVarNum, int fDumpRes,
     // delete data-structure
     Abc_TtStoreFree( p, nVarNum );
 //    printf( "Finished computing canonical forms for functions from file \"%s\".\n", pFileName );
+*/
 }
 
 
@@ -494,4 +497,5 @@ int Abc_TruthNpnCountUniqueH( Abc_TtStore_t * p )
             p->pFuncs[k++] = p->pFuncs[i];
     return (p->nFuncs = k);
 }
+
 ABC_NAMESPACE_IMPL_END
