@@ -303,13 +303,16 @@ enum {
 #endif
 #endif
 
-#ifndef HAVE_STRUCT_TIMESPEC
-#define HAVE_STRUCT_TIMESPEC 1
-struct timespec {
-        long tv_sec;
-        long tv_nsec;
-};
-#endif /* HAVE_STRUCT_TIMESPEC */
+#ifndef _TIMESPEC_DEFINED
+  #define _TIMESPEC_DEFINED
+  #ifndef HAVE_STRUCT_TIMESPEC
+    #define HAVE_STRUCT_TIMESPEC 1
+    struct timespec {
+            long tv_sec;
+            long tv_nsec;
+    };
+  #endif /* HAVE_STRUCT_TIMESPEC */
+#endif
 
 #ifndef SIG_BLOCK
 #define SIG_BLOCK 0
